@@ -3,6 +3,7 @@ package algorithm
 import (
 	"testing"
 
+	"github.com/bovinae/common/util"
 	. "github.com/smartystreets/goconvey/convey"
 )
 
@@ -10,12 +11,12 @@ func TestBinarySearch(t *testing.T) {
 	ids := []int{1, 3, 5, 7, 9}
 	compare := func(i int, target any) int {
 		if target.(int) < ids[i] {
-			return LESS
+			return util.LESS
 		}
 		if target == ids[i] {
-			return EQUAL
+			return util.EQUAL
 		}
-		return GREATER
+		return util.GREATER
 	}
 	Convey("TestBinarySearch", t, func() {
 		Convey("TestBinarySearch", func() {
@@ -27,26 +28,6 @@ func TestBinarySearch(t *testing.T) {
 			So(pos, ShouldEqual, -1)
 			pos = BinarySearch(ids, 10, compare)
 			So(pos, ShouldEqual, -1)
-		})
-	})
-}
-
-func TestCompareAny(t *testing.T) {
-	Convey("TestCompareAny", t, func() {
-		Convey("number", func() {
-			So(CompareAny(1, 7), ShouldEqual, LESS)
-			So(CompareAny(7, 7), ShouldEqual, EQUAL)
-			So(CompareAny(9, 7), ShouldEqual, GREATER)
-		})
-		Convey("string", func() {
-			So(CompareAny("1", "7"), ShouldEqual, LESS)
-			So(CompareAny("7", "7"), ShouldEqual, EQUAL)
-			So(CompareAny("9", "7"), ShouldEqual, GREATER)
-		})
-		Convey("bool", func() {
-			So(CompareAny(false, true), ShouldEqual, LESS)
-			So(CompareAny(true, true), ShouldEqual, EQUAL)
-			So(CompareAny(true, false), ShouldEqual, GREATER)
 		})
 	})
 }
