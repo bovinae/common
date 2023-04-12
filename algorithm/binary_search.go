@@ -48,6 +48,18 @@ func CompareAny(value1, value2 any) int {
 		return GREATER
 	}
 	switch value1 := value1.(type) {
+	case bool:
+		value2, ok := value2.(bool)
+		if !ok {
+			return LESS
+		}
+		if !value1 && value2 {
+			return LESS
+		}
+		if value1 == value2 {
+			return EQUAL
+		}
+		return GREATER
 	case []byte:
 		value2, ok := value2.([]byte)
 		if !ok {

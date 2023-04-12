@@ -43,5 +43,10 @@ func TestCompareAny(t *testing.T) {
 			So(CompareAny("7", "7"), ShouldEqual, EQUAL)
 			So(CompareAny("9", "7"), ShouldEqual, GREATER)
 		})
+		Convey("bool", func() {
+			So(CompareAny(false, true), ShouldEqual, LESS)
+			So(CompareAny(true, true), ShouldEqual, EQUAL)
+			So(CompareAny(true, false), ShouldEqual, GREATER)
+		})
 	})
 }
