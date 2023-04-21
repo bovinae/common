@@ -10,6 +10,7 @@ func TestGetRandomString(t *testing.T) {
 }
 
 func BenchmarkGetRandomString(b *testing.B) {
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		GetRandomString(8)
 	}

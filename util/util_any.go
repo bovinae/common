@@ -2,7 +2,9 @@ package util
 
 import (
 	"bytes"
+	"fmt"
 	"math"
+	"strings"
 	"time"
 )
 
@@ -110,4 +112,29 @@ func CompareAny(value1, value2 any) int {
 		return GREATER
 	}
 	return LESS
+}
+
+func IsEmpty(value any) bool {
+	if value == nil {
+		return true
+	}
+	if val, ok := value.(string); ok && len(strings.TrimSpace(val)) == 0 {
+		return true
+	}
+	return false
+}
+
+func FindFirstNonEmpty(pos int, values []any) (int, []rune) {
+	var curr []rune
+	for ; pos < len(values); pos++ {
+		if IsEmpty(values[pos]) {
+			continue
+		}
+		curr = []rune(fmt.Sprint(values[pos]))
+		if len(curr) == 0 {
+			continue
+		}
+		break
+	}
+	return pos, curr
 }
