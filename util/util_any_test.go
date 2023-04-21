@@ -45,7 +45,7 @@ func TestFindFirstNonEmpty(t *testing.T) {
 		Convey("TestFindFirstNonEmpty", func() {
 			pos, element := FindFirstNonEmpty(0, values)
 			So(pos, ShouldEqual, 1)
-			So(element, ShouldResemble, []rune(fmt.Sprint(123)))
+			So(element, ShouldResemble, []byte(fmt.Sprint(123)))
 
 			pos, _ = FindFirstNonEmpty(1, values)
 			So(pos, ShouldEqual, 1)

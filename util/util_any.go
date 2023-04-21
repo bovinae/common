@@ -124,13 +124,13 @@ func IsEmpty(value any) bool {
 	return false
 }
 
-func FindFirstNonEmpty(pos int, values []any) (int, []rune) {
-	var curr []rune
+func FindFirstNonEmpty(pos int, values []any) (int, []byte) {
+	var curr []byte
 	for ; pos < len(values); pos++ {
 		if IsEmpty(values[pos]) {
 			continue
 		}
-		curr = []rune(fmt.Sprint(values[pos]))
+		curr = []byte(fmt.Sprint(values[pos]))
 		if len(curr) == 0 {
 			continue
 		}
