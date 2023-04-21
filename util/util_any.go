@@ -131,9 +131,6 @@ func FindFirstNonEmpty(pos int, values []any) (int, []byte) {
 			continue
 		}
 		curr = []byte(fmt.Sprint(values[pos]))
-		if len(curr) == 0 {
-			continue
-		}
 		break
 	}
 	return pos, curr
