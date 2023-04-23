@@ -118,8 +118,11 @@ func IsEmpty(value any) bool {
 	if value == nil {
 		return true
 	}
-	if val, ok := value.(string); ok && len(strings.TrimSpace(val)) == 0 {
-		return true
+	if val, ok := value.(string); ok {
+		trimedVal := strings.TrimSpace(val)
+		if len(trimedVal) == 0 || trimedVal == "null" || trimedVal == "NULL" {
+			return true
+		}
 	}
 	return false
 }
