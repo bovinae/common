@@ -66,7 +66,7 @@ func (c *CsvClient) QueryCsv(ctx context.Context, args1, args2 Args) ([][]string
 }
 
 func (c *CsvClient) QueryOneTable(ctx context.Context, args Args) ([][]string, error) {
-	data, err := c.ReadCsvFile(ctx, args)
+	data, err := c.ReadCsvFile(ctx, args.TableName)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ func (c *CsvClient) QueryOneTable(ctx context.Context, args Args) ([][]string, e
 }
 
 func (c *CsvClient) QuerySameTable(ctx context.Context, args1, args2 Args) ([][]string, error) {
-	data, err := c.ReadCsvFile(ctx, args1)
+	data, err := c.ReadCsvFile(ctx, args1.TableName)
 	if err != nil {
 		return nil, err
 	}
@@ -145,8 +145,8 @@ func (c *CsvClient) getColumnIndex(ctx context.Context, column string, header []
 	return -1, errors.Wrap(comm_error.ErrGetColumnIndex, "get none index when getColumnIndex")
 }
 
-func (c *CsvClient) ReadCsvFile(ctx context.Context, args Args) ([][]string, error) {
-	csvFile, _ := os.Open(args.TableName)
+func (c *CsvClient) ReadCsvFile(ctx context.Context, fileName string) ([][]string, error) {
+	csvFile, _ := os.Open(fileName)
 	reader := csv.NewReader(bufio.NewReader(csvFile))
 	var values [][]string
 	for {
@@ -155,8 +155,7 @@ func (c *CsvClient) ReadCsvFile(ctx context.Context, args Args) ([][]string, err
 			break
 		}
 		if err != nil {
-			errors.Wrap(err, "read csv file failed")
-			return nil, err
+			return nil, errors.Wrap(err, "read csv file failed")
 		}
 		values = append(values, line)
 	}
