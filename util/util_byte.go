@@ -23,3 +23,14 @@ func GetSuffix(suffix, curr []byte) []byte {
 	}
 	return curr[j+1:]
 }
+
+func ReverseRuneSlice(rs []rune) {
+	rsLen := len(rs)
+	if rsLen == 0 {
+		return
+	}
+
+	for i := 0; i < rsLen/2; i++ {
+		rs[i], rs[rsLen-i-1] = rs[rsLen-i-1], rs[i]
+	}
+}

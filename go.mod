@@ -3,6 +3,7 @@ module github.com/bovinae/common
 go 1.19
 
 require (
+	github.com/bovinae/golang.org v0.0.0-20230407015729-c874838da024
 	github.com/pkg/errors v0.8.1
 	github.com/smartystreets/goconvey v1.7.2
 	go.uber.org/zap v1.24.0
