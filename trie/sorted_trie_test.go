@@ -16,18 +16,7 @@ func TestSortedTrieNode(t *testing.T) {
 		util.ReverseRuneSlice([]rune("100万元人民币")),
 	}
 	sort.Slice(tmp, func(i, j int) bool {
-		k, m := 0, 0
-		for k < len(tmp[i]) && m < len(tmp[j]) {
-			if tmp[i][k] < tmp[j][m] {
-				return true
-			}
-			if tmp[i][k] > tmp[j][m] {
-				return false
-			}
-			k++
-			m++
-		}
-		return m < len(tmp[j])
+		return util.RunesCompare(tmp[i], tmp[j]) <= 0
 	})
 	root = root.Add(tmp[0])
 	root = root.Add(tmp[1])

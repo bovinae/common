@@ -47,3 +47,24 @@ func ReverseByteSlice(rs []byte) []byte {
 	}
 	return rs
 }
+
+func RunesCompare(a, b []rune) int {
+	k, m := 0, 0
+	for k < len(a) && m < len(b) {
+		if a[k] < b[m] {
+			return -1
+		}
+		if a[k] > b[m] {
+			return 1
+		}
+		k++
+		m++
+	}
+	if k < len(a) {
+		return 1
+	}
+	if m < len(b) {
+		return -1
+	}
+	return 0
+}
