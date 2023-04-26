@@ -1,6 +1,6 @@
 package util
 
-func GetPrefix(prefix, curr []byte) []byte {
+func GetPrefix(prefix, curr []rune) []rune {
 	i, j := 0, 0
 	for i < len(prefix) && j < len(curr) {
 		if prefix[i] != curr[j] {
@@ -12,7 +12,7 @@ func GetPrefix(prefix, curr []byte) []byte {
 	return curr[:i]
 }
 
-func GetSuffix(suffix, curr []byte) []byte {
+func GetSuffix(suffix, curr []rune) []rune {
 	i, j := len(suffix)-1, len(curr)-1
 	for i >= 0 && j >= 0 {
 		if suffix[i] != curr[j] {
