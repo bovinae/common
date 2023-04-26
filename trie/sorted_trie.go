@@ -4,20 +4,20 @@ import (
 	"fmt"
 )
 
-type SortedTrieNode struct {
-	Character rune
+type SortedTrieNode[T byte | rune] struct {
+	Character T
 	Count     int
-	Next      []*SortedTrieNode
+	Next      []*SortedTrieNode[T]
 }
 
-func NewSortedTrieNode(c rune, cnt int) *SortedTrieNode {
-	return &SortedTrieNode{
+func NewSortedTrieNode[T byte | rune](c T, cnt int) *SortedTrieNode[T] {
+	return &SortedTrieNode[T]{
 		Character: c,
 		Count:     cnt,
 	}
 }
 
-func (root *SortedTrieNode) Add(input []rune) *SortedTrieNode {
+func (root *SortedTrieNode[T]) Add(input []T) *SortedTrieNode[T] {
 	if len(input) == 0 {
 		return root
 	}
@@ -32,7 +32,7 @@ func (root *SortedTrieNode) Add(input []rune) *SortedTrieNode {
 		return root
 	}
 
-	var pre *SortedTrieNode
+	var pre *SortedTrieNode[T]
 	curr := root
 	for i := 0; i < len(input); i++ {
 		if curr == nil {
@@ -60,7 +60,7 @@ func (root *SortedTrieNode) Add(input []rune) *SortedTrieNode {
 	return root
 }
 
-func (root *SortedTrieNode) GetMaxPrefix(prefix, maxPrefix []rune, threshold int) []rune {
+func (root *SortedTrieNode[T]) GetMaxPrefix(prefix, maxPrefix []T, threshold int) []T {
 	if root == nil {
 		return maxPrefix
 	}
@@ -68,7 +68,7 @@ func (root *SortedTrieNode) GetMaxPrefix(prefix, maxPrefix []rune, threshold int
 	curr := root
 	prefix = append(prefix, curr.Character)
 	if curr.Count >= threshold && len(prefix) > len(maxPrefix) {
-		maxPrefix = make([]rune, len(prefix))
+		maxPrefix = make([]T, len(prefix))
 		copy(maxPrefix, prefix)
 	}
 
@@ -79,12 +79,12 @@ func (root *SortedTrieNode) GetMaxPrefix(prefix, maxPrefix []rune, threshold int
 	return maxPrefix
 }
 
-func (root *SortedTrieNode) Dump() {
+func (root *SortedTrieNode[T]) Dump() {
 	if root == nil {
 		return
 	}
 
-	var queue []*SortedTrieNode
+	var queue []*SortedTrieNode[T]
 	queue = append(queue, root)
 	for len(queue) > 0 {
 		qLen := len(queue)

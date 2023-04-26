@@ -32,17 +32,17 @@ func TestReverseRuneSlice(t *testing.T) {
 	Convey("TestReverseRuneSlice", t, func() {
 		Convey("one char", func() {
 			rs := []rune("元")
-			ReverseRuneSlice(rs)
+			ReverseSlice(rs)
 			So(string(rs), ShouldEqual, "元")
 		})
 		Convey("two char", func() {
 			rs := []rune("元1")
-			ReverseRuneSlice(rs)
+			ReverseSlice(rs)
 			So(string(rs), ShouldEqual, "1元")
 		})
 		Convey("multi char", func() {
 			rs := []rune("1找s元素3")
-			ReverseRuneSlice(rs)
+			ReverseSlice(rs)
 			So(string(rs), ShouldEqual, "3素元s找1")
 		})
 	})

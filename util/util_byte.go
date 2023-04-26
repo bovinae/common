@@ -1,6 +1,6 @@
 package util
 
-func GetPrefix(prefix, curr []rune) []rune {
+func GetPrefix[T byte | rune](prefix, curr []T) []T {
 	i, j := 0, 0
 	for i < len(prefix) && j < len(curr) {
 		if prefix[i] != curr[j] {
@@ -12,7 +12,7 @@ func GetPrefix(prefix, curr []rune) []rune {
 	return curr[:i]
 }
 
-func GetSuffix(suffix, curr []rune) []rune {
+func GetSuffix[T byte | rune](suffix, curr []T) []T {
 	i, j := len(suffix)-1, len(curr)-1
 	for i >= 0 && j >= 0 {
 		if suffix[i] != curr[j] {
@@ -24,19 +24,7 @@ func GetSuffix(suffix, curr []rune) []rune {
 	return curr[j+1:]
 }
 
-func ReverseRuneSlice(rs []rune) []rune {
-	rsLen := len(rs)
-	if rsLen == 0 {
-		return rs
-	}
-
-	for i := 0; i < rsLen/2; i++ {
-		rs[i], rs[rsLen-i-1] = rs[rsLen-i-1], rs[i]
-	}
-	return rs
-}
-
-func ReverseByteSlice(rs []byte) []byte {
+func ReverseSlice[T byte | rune](rs []T) []T {
 	rsLen := len(rs)
 	if rsLen == 0 {
 		return rs
