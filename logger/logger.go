@@ -56,8 +56,8 @@ func InitLogger(opts ...Option) *zap.Logger {
 		LineEnding:     zapcore.DefaultLineEnding,
 		EncodeLevel:    zapcore.LowercaseLevelEncoder, // 小写编码器
 		EncodeTime:     zapcore.TimeEncoderOfLayout("2006-01-02 15:04:05.000"),
-		EncodeDuration: zapcore.SecondsDurationEncoder, //
-		EncodeCaller:   zapcore.FullCallerEncoder,      // 全路径编码器
+		EncodeDuration: zapcore.SecondsDurationEncoder,
+		EncodeCaller:   zapcore.FullCallerEncoder, // 全路径编码器
 		EncodeName:     zapcore.FullNameEncoder,
 	}
 	var hook *lumberjack.Logger
@@ -84,15 +84,11 @@ func InitLogger(opts ...Option) *zap.Logger {
 		writeSyncer,
 		atomicLevel, // 日志级别
 	)
-	// 开启开发模式，堆栈跟踪
-	caller := zap.AddCaller()
-	// 开启文件及行号
-	development := zap.Development()
 	// 设置初始化字段
 	// filed := zap.Fields(zap.String("serviceName", "serviceName"))
 	once.Do(func() {
 		// 构造日志
-		l = zap.New(core, caller, development)
+		l = zap.New(core, zap.AddCaller(), zap.AddCallerSkip(1), zap.Development())
 	})
 	return l
 }
