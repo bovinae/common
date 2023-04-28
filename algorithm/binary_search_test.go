@@ -9,7 +9,8 @@ import (
 
 func TestBinarySearch(t *testing.T) {
 	ids := []int{1, 3, 5, 7, 9}
-	compare := func(i int, target any) int {
+	var target any
+	compare := func(i int) int {
 		if target.(int) < ids[i] {
 			return util.LESS
 		}
@@ -20,14 +21,63 @@ func TestBinarySearch(t *testing.T) {
 	}
 	Convey("TestBinarySearch", t, func() {
 		Convey("TestBinarySearch", func() {
-			pos := BinarySearch(ids, 7, compare)
+			target = 7
+			pos := BinarySearch(ids, target, compare)
 			So(pos, ShouldEqual, 3)
-			pos = BinarySearch(ids, 0, compare)
+			target = 0
+			pos = BinarySearch(ids, target, compare)
 			So(pos, ShouldEqual, -1)
-			pos = BinarySearch(ids, 8, compare)
+			target = 8
+			pos = BinarySearch(ids, target, compare)
 			So(pos, ShouldEqual, -1)
-			pos = BinarySearch(ids, 10, compare)
+			target = 10
+			pos = BinarySearch(ids, target, compare)
 			So(pos, ShouldEqual, -1)
+		})
+	})
+}
+
+func TestLowerBound(t *testing.T) {
+	ids := []int{1, 3, 5, 7, 9}
+	var target any
+	compare := func(i int) int {
+		if target.(int) < ids[i] {
+			return util.LESS
+		}
+		if target == ids[i] {
+			return util.EQUAL
+		}
+		return util.GREATER
+	}
+	Convey("TestLowerBound", t, func() {
+		Convey("total number is odd", func() {
+			target = 0
+			pos := LowerBound(ids, target, compare)
+			So(pos, ShouldEqual, -1)
+			target = 2
+			pos = LowerBound(ids, target, compare)
+			So(pos, ShouldEqual, 0)
+			target = 5
+			pos = LowerBound(ids, target, compare)
+			So(pos, ShouldEqual, 2)
+			target = 10
+			pos = LowerBound(ids, target, compare)
+			So(pos, ShouldEqual, 4)
+		})
+		Convey("total number is even", func() {
+			ids = []int{1, 3, 5, 7, 9, 11}
+			target = 0
+			pos := LowerBound(ids, target, compare)
+			So(pos, ShouldEqual, -1)
+			target = 5
+			pos = LowerBound(ids, target, compare)
+			So(pos, ShouldEqual, 2)
+			target = 6
+			pos = LowerBound(ids, target, compare)
+			So(pos, ShouldEqual, 2)
+			target = 12
+			pos = LowerBound(ids, target, compare)
+			So(pos, ShouldEqual, 5)
 		})
 	})
 }
