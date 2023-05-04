@@ -1,11 +1,11 @@
 package trie
 
 import (
-	"fmt"
 	"sort"
 	"testing"
 
 	"github.com/bovinae/common/util"
+	. "github.com/smartystreets/goconvey/convey"
 )
 
 func TestSortedTrieNode(t *testing.T) {
@@ -22,5 +22,10 @@ func TestSortedTrieNode(t *testing.T) {
 	root = root.Add(tmp[1])
 	root = root.Add(tmp[2])
 	root.Dump()
-	fmt.Println(string(util.ReverseSlice(root.GetMaxPrefix(nil, nil, 2))))
+	Convey("TestSortedTrieNode", t, func() {
+		Convey("TestSortedTrieNode", func() {
+			suffix := string(util.ReverseSlice(root.GetMaxPrefix(nil, nil, 2)))
+			So(suffix, ShouldEqual, "00万元人民币")
+		})
+	})
 }
