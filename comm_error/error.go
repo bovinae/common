@@ -13,8 +13,6 @@ func (e *CommonError) Error() string {
 
 var (
 	// business error code: [500000, 600000)
-	ErrWrongType      = &CommonError{500000, "wrong type"}
-	ErrGetColumnIndex = &CommonError{500001, "get column index failed"}
-	ErrNoData         = &CommonError{500002, "no data"}
-	ErrWrongColumnNum = &CommonError{500003, "column number is wrong"}
+	ErrGetColumnIndex = &CommonError{500000, "get column index failed"}
+	ErrNoData         = &CommonError{500001, "no data"}
 )

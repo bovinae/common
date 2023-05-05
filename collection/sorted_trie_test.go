@@ -1,4 +1,4 @@
-package trie
+package collection
 
 import (
 	"sort"

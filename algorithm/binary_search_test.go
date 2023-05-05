@@ -26,13 +26,13 @@ func TestBinarySearch(t *testing.T) {
 			So(pos, ShouldEqual, 3)
 			target = 0
 			pos = BinarySearch(ids, target, compare)
-			So(pos, ShouldEqual, -1)
+			So(pos, ShouldEqual, NOT_FOUND)
 			target = 8
 			pos = BinarySearch(ids, target, compare)
-			So(pos, ShouldEqual, -1)
+			So(pos, ShouldEqual, NOT_FOUND)
 			target = 10
 			pos = BinarySearch(ids, target, compare)
-			So(pos, ShouldEqual, -1)
+			So(pos, ShouldEqual, NOT_FOUND)
 		})
 	})
 }
