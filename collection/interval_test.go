@@ -13,10 +13,11 @@ func TestAppendPoint(t *testing.T) {
 	si.dump()
 	Convey("TestAppendPoint", t, func() {
 		Convey("TestAppendPoint", func() {
-			So(si[0].Left, ShouldEqual, 1)
-			So(si[0].Right, ShouldEqual, 4)
-			So(si[1].Left, ShouldEqual, 10)
-			So(si[1].Right, ShouldEqual, 11)
+			So(si.Intervals[0].Left, ShouldEqual, 1)
+			So(si.Intervals[0].Right, ShouldEqual, 4)
+			So(si.Intervals[1].Left, ShouldEqual, 10)
+			So(si.Intervals[1].Right, ShouldEqual, 11)
+			So(si.GetTotalPoint(), ShouldEqual, 4)
 		})
 	})
 }
@@ -27,10 +28,11 @@ func TestAppendInterval(t *testing.T) {
 	si.dump()
 	Convey("TestAppendInterval", t, func() {
 		Convey("TestAppendInterval", func() {
-			So(si[0].Left, ShouldEqual, 1)
-			So(si[0].Right, ShouldEqual, 4)
-			So(si[1].Left, ShouldEqual, 10)
-			So(si[1].Right, ShouldEqual, 11)
+			So(si.Intervals[0].Left, ShouldEqual, 1)
+			So(si.Intervals[0].Right, ShouldEqual, 4)
+			So(si.Intervals[1].Left, ShouldEqual, 10)
+			So(si.Intervals[1].Right, ShouldEqual, 11)
+			So(si.GetTotalPoint(), ShouldEqual, 4)
 		})
 	})
 }
