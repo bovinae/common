@@ -43,4 +43,9 @@ func TestContainsSubSequence(t *testing.T) {
 			So(ContainsSubSequence("a时间2戳转ab换工10具f", "时转工"), ShouldEqual, true)
 		})
 	})
+	Convey("reverse sub sequence", t, func() {
+		Convey("middle subseq", func() {
+			So(ContainsSubSequence("a时间2戳转ab换工10具f", "转时"), ShouldEqual, false)
+		})
+	})
 }
