@@ -19,3 +19,28 @@ func TestReverseString(t *testing.T) {
 		})
 	})
 }
+
+func TestContainsSubSequence(t *testing.T) {
+	Convey("sub string", t, func() {
+		Convey("prefix substr", func() {
+			So(ContainsSubSequence("a时间2戳转ab换工10具f", "a时"), ShouldEqual, true)
+		})
+		Convey("suffix substr", func() {
+			So(ContainsSubSequence("a时间2戳转ab换工10具f", "10具f"), ShouldEqual, true)
+		})
+		Convey("middle substr", func() {
+			So(ContainsSubSequence("a时间2戳转ab换工10具f", "戳转"), ShouldEqual, true)
+		})
+	})
+	Convey("sub sequence", t, func() {
+		Convey("prefix subseq", func() {
+			So(ContainsSubSequence("a时间2戳转ab换工10具f", "a时2"), ShouldEqual, true)
+		})
+		Convey("suffix subseq", func() {
+			So(ContainsSubSequence("a时间2戳转ab换工10具f", "2换f"), ShouldEqual, true)
+		})
+		Convey("middle subseq", func() {
+			So(ContainsSubSequence("a时间2戳转ab换工10具f", "时转工"), ShouldEqual, true)
+		})
+	})
+}
