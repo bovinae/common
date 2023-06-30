@@ -48,4 +48,9 @@ func TestContainsSubSequence(t *testing.T) {
 			So(ContainsSubSequence("a时间2戳转ab换工10具f", "转时"), ShouldEqual, false)
 		})
 	})
+	Convey("digital number", t, func() {
+		Convey("digital number", func() {
+			So(ContainsSubSequence("246003", "030006"), ShouldEqual, false)
+		})
+	})
 }
