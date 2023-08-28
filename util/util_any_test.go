@@ -24,6 +24,12 @@ func TestCompareAny(t *testing.T) {
 			So(CompareAny(true, true), ShouldEqual, EQUAL)
 			So(CompareAny(true, false), ShouldEqual, GREATER)
 		})
+		Convey("nil", func() {
+			So(CompareAny(nil, nil), ShouldEqual, EQUAL)
+			So(CompareAny(nil, ""), ShouldEqual, LESS)
+			So(CompareAny("", nil), ShouldEqual, GREATER)
+			So(CompareAny("", 1), ShouldEqual, LESS)
+		})
 	})
 }
 
