@@ -6,8 +6,8 @@ import (
 )
 
 type ConcurrencyControl struct {
-	Ch chan struct{}
-	Wg sync.WaitGroup
+	ch chan struct{}
+	wg sync.WaitGroup
 }
 
 func NewConcurrencyControl(coefficient float64) *ConcurrencyControl {
@@ -19,25 +19,26 @@ func NewConcurrencyControl(coefficient float64) *ConcurrencyControl {
 	if tokenNum <= 0 {
 		tokenNum = 1
 	}
+	return NewControllerWithTokenNum(tokenNum)
+}
+
+func NewControllerWithTokenNum(tokenNum int) *ConcurrencyControl {
 	ch := make(chan struct{}, tokenNum)
-	for i := 0; i < tokenNum; i++ {
-		ch <- struct{}{}
-	}
 	return &ConcurrencyControl{
-		Ch: ch,
+		ch: ch,
 	}
 }
 
 func (c *ConcurrencyControl) Get() {
-	<-c.Ch
-	c.Wg.Add(1)
+	c.ch <- struct{}{}
+	c.wg.Add(1)
 }
 
 func (c *ConcurrencyControl) Put() {
-	c.Ch <- struct{}{}
-	c.Wg.Done()
+	<-c.ch
+	c.wg.Done()
 }
 
 func (c *ConcurrencyControl) Wait() {
-	c.Wg.Wait()
+	c.wg.Wait()
 }

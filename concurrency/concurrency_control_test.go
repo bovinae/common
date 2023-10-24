@@ -1,7 +1,6 @@
 package concurrency
 
 import (
-	"fmt"
 	"sort"
 	"sync/atomic"
 	"testing"
@@ -16,7 +15,7 @@ func TestConcurrencyControl(t *testing.T) {
 	expected := make([]int, 0, total)
 	ch := make(chan int, total)
 	cc := NewConcurrencyControl(1)
-	expectedGoroutine := len(cc.Ch)
+	expectedGoroutine := cap(cc.ch)
 	for i := 0; i < total; i++ {
 		i := i
 		expected = append(expected, i)
@@ -43,7 +42,7 @@ func TestConcurrencyControl(t *testing.T) {
 	Convey("TestConcurrencyControl", t, func() {
 		Convey("TestConcurrencyControl", func() {
 			So(result, ShouldResemble, expected)
-			fmt.Println(minTokenSize, maxTokenSize)
+			// fmt.Println(minTokenSize, maxTokenSize)
 			So(minTokenSize, ShouldBeGreaterThanOrEqualTo, 0)
 			So(maxTokenSize, ShouldBeLessThanOrEqualTo, expectedGoroutine)
 		})
@@ -51,7 +50,7 @@ func TestConcurrencyControl(t *testing.T) {
 }
 
 func getMinMaxTokenSize(cc *ConcurrencyControl, minTokenSize, maxTokenSize *int64) {
-	currGoroutine := int64(len(cc.Ch))
+	currGoroutine := int64(len(cc.ch))
 	tmp := atomic.LoadInt64(minTokenSize)
 	if currGoroutine < tmp {
 		atomic.CompareAndSwapInt64(minTokenSize, tmp, currGoroutine)
