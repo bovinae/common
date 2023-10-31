@@ -37,3 +37,23 @@ func TestCalcSigma(t *testing.T) {
 		})
 	})
 }
+
+func TestNextPow2(t *testing.T) {
+	Convey("TestNextPow2", t, func() {
+		Convey("0", func() {
+			So(NextPow2(0), ShouldEqual, 0)
+		})
+		Convey("1", func() {
+			So(NextPow2(1), ShouldEqual, 1)
+		})
+		Convey("2", func() {
+			So(NextPow2(2), ShouldEqual, 2)
+		})
+		Convey("3", func() {
+			So(NextPow2(3), ShouldEqual, 4)
+		})
+		Convey("78", func() {
+			So(NextPow2(78), ShouldEqual, 128)
+		})
+	})
+}

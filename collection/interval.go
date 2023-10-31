@@ -4,15 +4,12 @@ import (
 	"fmt"
 
 	"github.com/bovinae/common/algorithm"
+	"github.com/bovinae/common/types"
 	"github.com/bovinae/common/util"
 )
 
-type integer interface {
-	int | int8 | int16 | int32 | int64 | uint | uint8 | uint16 | uint32 | uint64
-}
-
 // Left closed and right open: [a, b).
-type Interval[T integer] struct {
+type Interval[T types.Integer] struct {
 	Left  T
 	Right T
 }
@@ -22,12 +19,12 @@ func (i Interval[T]) String() string {
 }
 
 // Sorted in ascending order by left endpoint and without intersections.
-type SortedInterval[T integer] struct {
+type SortedInterval[T types.Integer] struct {
 	Intervals  []Interval[T]
 	TotalPoint int
 }
 
-func NewSortedInterval[T integer]() *SortedInterval[T] {
+func NewSortedInterval[T types.Integer]() *SortedInterval[T] {
 	return &SortedInterval[T]{}
 }
 
